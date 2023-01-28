@@ -3,9 +3,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from decouple import config
 
-SERVER = "10.10.1.38:4444"
+SERVER = "http://10.10.1.38:4444"
 LOGIN = "erwin@posteo.de"
 PASSWORD = """2%FAV'?>'-"H11:Els{;!!J`Crz*jTKm"""
 URL = "https://www.strava.com/dashboard/following/40"
@@ -31,6 +30,8 @@ class StravaKudos:
     def thumbs_up(self):
         while True:
             self.driver.execute_script("document.querySelectorAll('[title=\"Give kudos\"]').forEach(button => button.click());")
+            time.sleep(2)
+            self.driver.execute_script("document.querySelectorAll('[title=\"Be the first to give kudos!\"]').forEach(button => button.click());")
             refresher = random.randint(1800, 4800)
             time.sleep(refresher)
             self.driver.refresh()

@@ -7,5 +7,3 @@ services:
     command: python main.py
     volumes:
       - .:/usr/src/app
-    env_file:
-      - ./.env
