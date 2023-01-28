@@ -5,16 +5,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from decouple import config
 
-SERVER = config('SERVER')
-LOGIN= config('LOGIN')
-PASSWORD = config('PASSWORD')
-URL = config('URL')
+SERVER = "10.10.1.38:4444"
+LOGIN = "erwin@posteo.de"
+PASSWORD = """2%FAV'?>'-"H11:Els{;!!J`Crz*jTKm"""
+URL = "https://www.strava.com/dashboard/following/40"
 
 class StravaKudos:
 
     def __init__(self):
         self.options = webdriver.ChromeOptions()
-        self.driver = webdriver.Remote(command_executor=config(SERVER),
+        self.driver = webdriver.Remote(command_executor=SERVER,
                                        options=self.options)
         self.driver.maximize_window()
 
@@ -30,8 +30,8 @@ class StravaKudos:
 
     def thumbs_up(self):
         while True:
-            refresher = random.randint(1800, 4800)
             self.driver.execute_script("document.querySelectorAll('[title=\"Give kudos\"]').forEach(button => button.click());")
+            refresher = random.randint(1800, 4800)
             time.sleep(refresher)
             self.driver.refresh()
 
