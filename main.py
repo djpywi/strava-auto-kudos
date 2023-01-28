@@ -1,3 +1,4 @@
+import random
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -25,8 +26,9 @@ class StravaKudos:
 
     def thumbs_up(self):
         while True:
+            refresher = random.randint(1800, 4800)
             self.driver.execute_script("document.querySelectorAll('[title=\"Give kudos\"]').forEach(button => button.click());")
-            time.sleep(3600)
+            time.sleep(refresher)
             self.driver.refresh()
 
 
