@@ -10,17 +10,17 @@ class StravaKudos:
 
     def __init__(self):
         self.options = webdriver.ChromeOptions()
-        self.driver = webdriver.Remote(command_executor=config("SELENIUMSERVER"),
+        self.driver = webdriver.Remote(command_executor=config('SELENIUMSERVER'),
                                        options=self.options)
         self.driver.maximize_window()
 
     def load_page(self):
-        self.driver.get(config("URL"))
+        self.driver.get(config('URL'))
         time.sleep(3)
         username = self.driver.find_element(By.NAME, "email")
         password = self.driver.find_element(By.NAME, "password")
-        username.send_keys(config("LOGIN"))
-        password.send_keys(config("PASSWORD"))
+        username.send_keys(config('LOGIN'))
+        password.send_keys(config('PASSWORD'))
         time.sleep(3)
         password.send_keys(Keys.RETURN)
 
