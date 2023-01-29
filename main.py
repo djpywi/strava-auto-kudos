@@ -34,6 +34,8 @@ class StravaKudos:
             time.sleep(2)
             self.driver.execute_script("document.querySelectorAll('[title=\"Be the first to give kudos!\"]').forEach(button => button.click());")
             time.sleep(2)
+            self.driver.execute_script("document.querySelectorAll('.AthleteJoinEntry--join-btn--Mh-s+').forEach(button => button.click());")
+            time.sleep(2)
             self.driver.close()
 
             refresher = random.randint(10800, 14400)
