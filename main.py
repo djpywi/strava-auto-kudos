@@ -4,11 +4,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-
 SERVER = "http://10.10.1.30:4444"
 LOGIN = "erwin@posteo.de"
 PASSWORD = """2%FAV'?>'-"H11:Els{;!!J`Crz*jTKm"""
 URL = "https://www.strava.com/dashboard/following/40"
+
 
 class StravaKudos:
 
@@ -35,10 +35,7 @@ class StravaKudos:
             time.sleep(2)
             self.driver.execute_script("document.querySelectorAll('[title=\"Be the first to give kudos!\"]').forEach(button => button.click());")
             time.sleep(2)
-            self.driver.execute_script("document.querySelectorAll('.Button--primary--x47Uv.AthleteJoinEntry--join-btn--Mh-s+').forEach(button => button.click());")
-            time.sleep(2)
             self.driver.close()
-
             refresher = random.randint(10800, 14400)
             time.sleep(refresher)
             self.load_page()
