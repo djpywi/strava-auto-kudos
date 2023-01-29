@@ -8,7 +8,7 @@ SERVER = "http://10.10.1.30:4444"
 LOGIN = "erwin@posteo.de"
 PASSWORD = """2%FAV'?>'-"H11:Els{;!!J`Crz*jTKm"""
 URL = "https://www.strava.com/dashboard/following/40"
-
+KEEP_GOING = True
 
 class StravaKudos:
 
@@ -29,19 +29,20 @@ class StravaKudos:
         password.send_keys(Keys.RETURN)
 
     def thumbs_up(self):
-        while True:
-            time.sleep(4)
-            self.driver.execute_script("document.querySelectorAll('[title=\"Give kudos\"]').forEach(button => button.click());")
-            time.sleep(2)
-            self.driver.execute_script("document.querySelectorAll('[title=\"Be the first to give kudos!\"]').forEach(button => button.click());")
-            time.sleep(2)
-            self.driver.close()
-            refresher = random.randint(10800, 14400)
-            time.sleep(refresher)
-            self.load_page()
-            self.thumbs_up()
+        time.sleep(4)
+        self.driver.execute_script("document.querySelectorAll('[title=\"Give kudos\"]').forEach(button => button.click());")
+        time.sleep(2)
+        self.driver.execute_script("document.querySelectorAll('[title=\"Be the first to give kudos!\"]').forEach(button => button.click());")
+        time.sleep(2)
+        self.driver.close()
+
+    def deep_sleep(self):
+        refresher = random.randint(10800, 14400)
+        time.sleep(refresher)
 
 
-kudos = StravaKudos()
-kudos.load_page()
-kudos.thumbs_up()
+while KEEP_GOING:
+    kudos = StravaKudos()
+    kudos.load_page()
+    kudos.thumbs_up()
+    kudos.deep_sleep()
