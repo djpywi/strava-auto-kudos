@@ -6,20 +6,16 @@ from selenium import webdriver
 KEEP_GOING = config("KEEP_GOING", default=True, cast=bool)
 
 
-class Selenium_config(StravaKudos):
+class SeleniumConfig(StravaKudos):
     def __init__(self):
-        self.SERVER = config("SERVER")
-        self.LOGIN = config("LOGIN")
-        self.PASSWORD = config("PASSWORD")
-        self.URL = config("URL")
-
+        super().__init__()
         self.options = webdriver.ChromeOptions()
         self.driver = webdriver.Remote(command_executor=self.SERVER,
                                        options=self.options)
         self.driver.maximize_window()
 
 
-kudos = Selenium_config()
+kudos = SeleniumConfig()
 
 if KEEP_GOING:
     while KEEP_GOING:

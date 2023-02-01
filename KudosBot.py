@@ -1,8 +1,6 @@
 import random
 import time
 from decouple import config
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -10,20 +8,10 @@ from selenium.webdriver.common.keys import Keys
 class StravaKudos:
 
     def __init__(self):
+        self.SERVER = config("SERVER")
         self.LOGIN = config("LOGIN")
         self.PASSWORD = config("PASSWORD")
         self.URL = config("URL")
-
-        self.options = Options()
-        # self.options.add_experimental_option("detach", True) # keeps the selenium controlled browser open
-        # self.options.add_argument("--headless") # headless mode for server commandline usage
-        self.options.add_argument("--no-sandbox")
-        self.options.add_argument("--disable-dev-shm-usage")
-        self.chrome_prefs = {}
-        self.options.experimental_options["prefs"] = self.chrome_prefs
-        self.chrome_prefs["profile.default_content_settings"] = {"images": 2}  # disables images
-        self.driver = webdriver.Chrome(options=self.options)
-        self.driver.get(self.URL)
 
     def deep_sleep(self):
         interval = random.randint(10800, 14400)
