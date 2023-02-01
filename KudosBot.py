@@ -4,6 +4,7 @@ from decouple import config
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+KEEP_GOING = config("KEEP_GOING")
 
 class StravaKudos:
 
@@ -12,14 +13,15 @@ class StravaKudos:
         self.LOGIN = config("LOGIN")
         self.PASSWORD = config("PASSWORD")
         self.URL = config("URL")
-
-    def deep_sleep(self):
-        interval = random.randint(10800, 14400)
-        time.sleep(interval)
+        self.KEEP_GOING = KEEP_GOING
 
     def take_nap(self):
         nap_time = random.randint(3, 7)
         time.sleep(nap_time)
+
+    def deep_sleep(self):
+        interval = random.randint(10800, 14400)
+        time.sleep(interval)
 
     # Navigate to Strava and fills out credentials
     def load_page(self):
@@ -48,3 +50,11 @@ class StravaKudos:
     def dothework(self):
         self.load_page()
         self.thumbs_up()
+
+    def give_kudos(self):
+        if self.KEEP_GOING:
+            while self.KEEP_GOING:
+                self.dothework()
+                self.deep_sleep()
+        else:
+            self.dothework()

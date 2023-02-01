@@ -3,9 +3,7 @@ from decouple import config
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-# Login every 3-4 hours and hits the Button
-KEEP_GOING = config("KEEP_GOING", default=True, cast=bool)
-
+keep_going = config("KEEP_GOING")
 
 class LocalConfig(StravaKudos):
     def __init__(self):
@@ -21,11 +19,5 @@ class LocalConfig(StravaKudos):
         self.driver = webdriver.Chrome(options=self.options)
         self.driver.get(self.URL)
 
-kudos = LocalConfig()
-
-if KEEP_GOING:
-    while KEEP_GOING:
-        kudos.dothework()
-        kudos.deep_sleep()
-else:
-    kudos.dothework()
+assistant = LocalConfig()
+assistant.give_kudos()

@@ -15,11 +15,5 @@ class SeleniumConfig(StravaKudos):
         self.driver.maximize_window()
 
 
-kudos = SeleniumConfig()
-
-if KEEP_GOING:
-    while KEEP_GOING:
-        kudos.dothework()
-        kudos.deep_sleep()
-else:
-    kudos.dothework()
+assisant = SeleniumConfig()
+assisant.give_kudos()
