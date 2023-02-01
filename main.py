@@ -55,8 +55,9 @@ class StravaKudos:
         self.driver.close()
 
 
+kudos = StravaKudos()
+
 while KEEP_GOING:
-    kudos = StravaKudos()
     kudos.load_page()
     kudos.thumbs_up()
     kudos.deep_sleep()
