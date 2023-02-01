@@ -1,5 +1,4 @@
 from KudosBot import StravaKudos
-from decouple import config
 from selenium import webdriver
 
 
