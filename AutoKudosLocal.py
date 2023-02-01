@@ -3,9 +3,8 @@ from decouple import config
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-keep_going = config("KEEP_GOING")
 
-class LocalConfig(StravaKudos):
+class LocalCrowd(StravaKudos):
     def __init__(self):
         super().__init__()
         self.options = Options()
@@ -19,5 +18,6 @@ class LocalConfig(StravaKudos):
         self.driver = webdriver.Chrome(options=self.options)
         self.driver.get(self.URL)
 
-assistant = LocalConfig()
-assistant.give_kudos()
+
+crowd = LocalCrowd()
+crowd.applause()

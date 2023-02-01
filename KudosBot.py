@@ -4,7 +4,9 @@ from decouple import config
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-KEEP_GOING = config("KEEP_GOING")
+# Login every 3-4 hours and hits the Button
+KEEP_GOING = config("KEEP_GOING", default=True, cast=bool)
+
 
 class StravaKudos:
 
@@ -51,7 +53,7 @@ class StravaKudos:
         self.load_page()
         self.thumbs_up()
 
-    def give_kudos(self):
+    def applause(self):
         if self.KEEP_GOING:
             while self.KEEP_GOING:
                 self.dothework()
