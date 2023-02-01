@@ -1,44 +1,58 @@
 import random
 import time
+from decouple import config
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-SERVER = "http://10.10.1.30:4444"
-LOGIN = "erwin@posteo.de"
-PASSWORD = """2%FAV'?>'-"H11:Els{;!!J`Crz*jTKm"""
-URL = "https://www.strava.com/dashboard/following/40"
-KEEP_GOING = True
+# Login every 3-4 hours and hits the Button
+KEEP_GOING = config("KEEP_GOING", default=True, cast=bool)
+
 
 class StravaKudos:
 
     def __init__(self):
+        self.SERVER = config("SERVER")
+        self.LOGIN = config("LOGIN")
+        self.PASSWORD = config("PASSWORD")
+        self.URL = config("URL")
+
         self.options = webdriver.ChromeOptions()
-        self.driver = webdriver.Remote(command_executor=SERVER,
+        self.driver = webdriver.Remote(command_executor=self.SERVER,
                                        options=self.options)
         self.driver.maximize_window()
 
+    def deep_sleep(self):
+        interval = random.randint(10800, 14400)
+        time.sleep(interval)
+
+    def take_nap(self):
+        nap_time = random.randint(3, 7)
+        time.sleep(nap_time)
+
+    # Navigate to Strava and fills out credentials
     def load_page(self):
-        self.driver.get(URL)
-        time.sleep(3)
+        self.driver.get(self.URL)
+        self.take_nap()
         username = self.driver.find_element(By.NAME, "email")
         password = self.driver.find_element(By.NAME, "password")
-        username.send_keys(LOGIN)
-        password.send_keys(PASSWORD)
-        time.sleep(3)
+        username.send_keys(self.LOGIN)
+        password.send_keys(self.PASSWORD)
+        self.take_nap()
         password.send_keys(Keys.RETURN)
 
     def thumbs_up(self):
-        time.sleep(4)
-        self.driver.execute_script("document.querySelectorAll('[title=\"Give kudos\"]').forEach(button => button.click());")
-        time.sleep(2)
-        self.driver.execute_script("document.querySelectorAll('[title=\"Be the first to give kudos!\"]').forEach(button => button.click());")
-        time.sleep(2)
-        self.driver.close()
+        # Click buttons with "Give Kudos" title
+        self.take_nap()
+        self.driver.execute_script(
+            "document.querySelectorAll('[title=\"Give kudos\"]').forEach(button => button.click());")
+        self.take_nap()
 
-    def deep_sleep(self):
-        refresher = random.randint(10800, 14400)
-        time.sleep(refresher)
+        # Click buttons with "Be the first to give kudos!" title
+        self.driver.execute_script(
+            "document.querySelectorAll('[title=\"Be the first to give kudos!\"]').forEach(button => button.click());")
+        self.take_nap()
+        self.driver.close()
 
 
 while KEEP_GOING:
