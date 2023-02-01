@@ -5,8 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-# Login every 3-4 hours and hits the Button
-KEEP_GOING = config("KEEP_GOING", default=True, cast=bool)
+# If True the scripts logins in every 3-4 hours and gives kudos
+KEEP_GOING = config("KEEP_GOING", default=False, cast=bool)
 
 
 class StravaKudos:
