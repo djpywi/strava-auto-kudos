@@ -4,9 +4,6 @@ from decouple import config
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-# Login every 3-4 hours and hits the Button
-KEEP_GOING = config("KEEP_GOING", default=True, cast=bool)
-
 
 class StravaKudos:
 
@@ -15,7 +12,7 @@ class StravaKudos:
         self.LOGIN = config("LOGIN")
         self.PASSWORD = config("PASSWORD")
         self.URL = config("URL")
-        self.KEEP_GOING = KEEP_GOING
+        self.KEEP_GOING = KEEP_GOING = config("KEEP_GOING", default=True, cast=bool)
 
     def take_nap(self):
         nap_time = random.randint(3, 7)
